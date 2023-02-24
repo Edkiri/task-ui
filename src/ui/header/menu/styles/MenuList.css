@@ -1,0 +1,13 @@
+.MenuList {
+    position: absolute;
+    padding: 0;
+    background-color: black;
+    left: 0;
+    top: -16px;
+    bottom: 0;
+    width: 60%;
+    max-width: 300px;
+    z-index: 2;
+    padding-top: 60px;
+    border-right: 1px solid grey;
+}

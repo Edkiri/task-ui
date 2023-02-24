@@ -12,6 +12,7 @@ import { Container } from '@mui/system';
 
 import { QueryClientProvider } from '@tanstack/react-query';
 import { QueryClient } from '@tanstack/query-core';
+import Header from './ui/header/Header';
 
 const darkTheme = createTheme({
   palette: {
@@ -22,6 +23,7 @@ const darkTheme = createTheme({
 export function App() {
   return (
     <>
+      <Header />
       <Container maxWidth="md" sx={{ mt: 2 }}>
         <Routes>
           <Route path="/" element={<Home />} />

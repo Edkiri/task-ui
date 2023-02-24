@@ -2,7 +2,7 @@ import { List } from '@mui/material';
 import GradeIcon from '@mui/icons-material/Grade';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 
-import '../styles/MenuList.css';
+import '../MenuList.css';
 import MenuItem from './MenuItem';
 import { Link } from 'react-router-dom';
 

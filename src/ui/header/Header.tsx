@@ -2,7 +2,7 @@ import { AppBar, Box, Toolbar } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
-import useMenu from './menu/hooks/useMenu';
+import useMenu from './menu/useMenu';
 import MenuList from './menu/components/MenuList';
 
 function Header() {

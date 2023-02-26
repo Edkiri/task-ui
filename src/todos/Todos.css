@@ -1,0 +1,20 @@
+.HeaderCompletedContainer {
+    display: flex;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    margin-top: 8px;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 14px;
+}
+.HeaderCompletedContainer .ArrowIcon {
+    font-size: 14px;
+    transition: rotate .2s;
+}
+.HeaderCompletedContainer .ArrowIcon.open {
+    rotate: 90deg;
+}

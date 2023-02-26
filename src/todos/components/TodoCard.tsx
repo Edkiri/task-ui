@@ -3,27 +3,27 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import { TodoWithId } from './types';
+import { Itodo } from '../types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toggleCheck, removeTodo } from './api';
+import { toggleCheck, removeTodo } from '../services/api';
 import { IconButton, ListItem } from '@mui/material';
 
 export interface TodoCardProps {
-  todo: TodoWithId;
+  todo: Itodo;
 }
 
 function TodoCard({ todo }: TodoCardProps) {
   const queryClient = useQueryClient();
 
   const { isLoading: isLoadingUpdate, mutate: mutateUpdate } = useMutation({
-    mutationFn: (todo: TodoWithId) => toggleCheck(todo),
+    mutationFn: (todo: Itodo) => toggleCheck(todo),
     onSuccess: () => {
       queryClient.invalidateQueries(['findAllTodos']);
     },
   });
 
   const { isLoading: isLoadingDelete, mutate: mutateDelete } = useMutation({
-    mutationFn: (todo: TodoWithId) => removeTodo(todo),
+    mutationFn: (todo: Itodo) => removeTodo(todo),
     onSuccess: () => {
       queryClient.invalidateQueries(['findAllTodos']);
     },

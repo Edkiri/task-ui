@@ -15,10 +15,10 @@ function MenuList() {
     <nav className="MenuList">
       <List sx={{ zIndex: 1, mt: 1 }}>
         <Link to={'/'}>
-          <MenuItem iconEl={<GradeIcon />} title={MenuOptions.MYDAY} />
+          <MenuItem iconEl={<WbSunnyIcon />} title={MenuOptions.MYDAY} />
         </Link>
         <Link to={'/important'}>
-          <MenuItem iconEl={<WbSunnyIcon />} title={MenuOptions.IMPORTANT} />
+          <MenuItem iconEl={<GradeIcon />} title={MenuOptions.IMPORTANT} />
         </Link>
       </List>
     </nav>

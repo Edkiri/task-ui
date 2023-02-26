@@ -3,7 +3,7 @@ export type Todo = {
   done: boolean;
 };
 
-export type TodoWithId = Todo & {
+export type Itodo = Todo & {
   id: number;
   createdAt: string;
 };

@@ -2,8 +2,8 @@ import { Box, FormControl, InputLabel, OutlinedInput } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createOne } from './api';
-import { Todo } from './types';
+import { createOne } from '../services/api';
+import { Todo } from '../types';
 
 function NewTodoForm() {
   const queryClient = useQueryClient();

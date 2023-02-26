@@ -1,5 +1,5 @@
-import NewTodoForm from '../todos/NewTodoForm';
-import TodoList from '../todos/TodoList';
+import NewTodoForm from '../todos/components/NewTodoForm';
+import TodoList from '../todos/components/TodoList';
 
 function Home() {
   return (

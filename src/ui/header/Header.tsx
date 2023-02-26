@@ -6,6 +6,8 @@ import { useContext } from 'react';
 import { MenuContext } from './context/MenuContext';
 import MenuList from './components/MenuList';
 
+import './Header.css';
+
 function Header() {
   const { isOpen, toggleMenu } = useContext(MenuContext);
 

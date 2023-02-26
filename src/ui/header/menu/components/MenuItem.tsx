@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   ListItem,
   ListItemButton,
@@ -6,20 +6,16 @@ import {
   ListItemText,
 } from '@mui/material';
 import { MenuOptions } from './MenuList';
+import { MenuContext } from '../context/MenuContext';
 
 interface MenuItemProps {
   iconEl: React.ReactNode;
   title: MenuOptions;
-  selectedOption: MenuOptions;
-  selectOption: (option: MenuOptions) => void;
 }
 
-function MenuItem({
-  title,
-  iconEl,
-  selectedOption,
-  selectOption,
-}: MenuItemProps) {
+function MenuItem({ title, iconEl }: MenuItemProps) {
+  const { selectOption, optionSelected } = useContext(MenuContext);
+
   const handleClick = () => {
     selectOption(title);
   };
@@ -29,10 +25,10 @@ function MenuItem({
       sx={{
         padding: '0px 0px',
         '&:hover': {
-          backgroundColor: `${selectedOption != title && 'action.hover'}`,
+          backgroundColor: `${optionSelected != title && 'action.hover'}`,
         },
         backgroundColor: `${
-          selectedOption == title && 'rgba(255, 255, 255, 0.3)'
+          optionSelected == title && 'rgba(255, 255, 255, 0.3)'
         }`,
       }}
     >

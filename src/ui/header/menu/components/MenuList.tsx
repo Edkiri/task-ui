@@ -11,30 +11,15 @@ export enum MenuOptions {
   IMPORTANT = 'Important',
 }
 
-interface MenuListProps {
-  selectedOption: MenuOptions;
-  selectOption: (option: MenuOptions) => void;
-}
-
-function MenuList({ selectedOption, selectOption }: MenuListProps) {
+function MenuList() {
   return (
     <nav className="MenuList">
       <List sx={{ zIndex: 1, mt: 1 }}>
         <Link to={'/'}>
-          <MenuItem
-            iconEl={<GradeIcon />}
-            title={MenuOptions.MYDAY}
-            selectedOption={selectedOption}
-            selectOption={selectOption}
-          />
+          <MenuItem iconEl={<GradeIcon />} title={MenuOptions.MYDAY} />
         </Link>
         <Link to={'/important'}>
-          <MenuItem
-            iconEl={<WbSunnyIcon />}
-            title={MenuOptions.IMPORTANT}
-            selectedOption={selectedOption}
-            selectOption={selectOption}
-          />
+          <MenuItem iconEl={<WbSunnyIcon />} title={MenuOptions.IMPORTANT} />
         </Link>
       </List>
     </nav>

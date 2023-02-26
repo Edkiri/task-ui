@@ -2,11 +2,12 @@ import { AppBar, Box, Toolbar } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
-import useMenu from './menu/useMenu';
 import MenuList from './menu/components/MenuList';
+import { MenuContext } from './menu/context/MenuContext';
+import { useContext } from 'react';
 
 function Header() {
-  const { isOpen, toggleMenu, selectOption, menuOptionSelected } = useMenu();
+  const { isOpen, toggleMenu } = useContext(MenuContext);
 
   return (
     <>
@@ -29,12 +30,7 @@ function Header() {
           </Toolbar>
         </AppBar>
       </Box>
-      {isOpen && (
-        <MenuList
-          selectOption={selectOption}
-          selectedOption={menuOptionSelected}
-        />
-      )}
+      {isOpen && <MenuList />}
     </>
   );
 }

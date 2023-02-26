@@ -12,8 +12,8 @@ import { Container } from '@mui/system';
 
 import { QueryClientProvider } from '@tanstack/react-query';
 import { QueryClient } from '@tanstack/query-core';
+import { MenuProvider } from './ui/header/context/MenuContext';
 import Header from './ui/header/Header';
-import { MenuProvider } from './ui/header/menu/context/MenuContext';
 
 const darkTheme = createTheme({
   palette: {

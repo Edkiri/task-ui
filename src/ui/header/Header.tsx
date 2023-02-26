@@ -2,9 +2,9 @@ import { AppBar, Box, Toolbar } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
-import MenuList from './menu/components/MenuList';
-import { MenuContext } from './menu/context/MenuContext';
 import { useContext } from 'react';
+import { MenuContext } from './context/MenuContext';
+import MenuList from './components/MenuList';
 
 function Header() {
   const { isOpen, toggleMenu } = useContext(MenuContext);

@@ -24,7 +24,7 @@ function NewTodoForm() {
   const formSubmited = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!newTodo.trim()) return;
-    mutate({ content: newTodo, done: false });
+    mutate({ content: newTodo, done: false, important: false });
   };
 
   return (

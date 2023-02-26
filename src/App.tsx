@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
+import MyDay from './pages/MyDay';
 import NotFound from './pages/NotFound';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -14,6 +14,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { QueryClient } from '@tanstack/query-core';
 import { MenuProvider } from './ui/header/context/MenuContext';
 import Header from './ui/header/Header';
+import Important from './pages/Important';
 
 const darkTheme = createTheme({
   palette: {
@@ -27,7 +28,8 @@ export function App() {
       <Header />
       <Container maxWidth="md" sx={{ mt: 2 }}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<MyDay />} />
+          <Route path="/important" element={<Important />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>

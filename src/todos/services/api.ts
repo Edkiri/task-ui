@@ -10,9 +10,11 @@ export async function createOne(todo: Todo) {
   return data;
 }
 
-export async function toggleCheck(todo: Itodo) {
+export async function updateOne(todo: Itodo) {
   const { data } = await client.put<Itodo>(`/${todo.id}`, {
     done: todo.done,
+    important: todo.important,
+    content: todo.content,
   });
   return data;
 }

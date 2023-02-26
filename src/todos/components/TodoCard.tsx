@@ -1,11 +1,12 @@
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
-import DeleteIcon from '@mui/icons-material/Delete';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarIcon from '@mui/icons-material/Star';
 
 import { Itodo } from '../types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toggleCheck, removeTodo } from '../services/api';
+import { updateOne } from '../services/api';
 import { IconButton, ListItem } from '@mui/material';
 
 export interface TodoCardProps {
@@ -16,27 +17,22 @@ function TodoCard({ todo }: TodoCardProps) {
   const queryClient = useQueryClient();
 
   const { isLoading: isLoadingUpdate, mutate: mutateUpdate } = useMutation({
-    mutationFn: (todo: Itodo) => toggleCheck(todo),
-    onSuccess: () => {
-      queryClient.invalidateQueries(['findAllTodos']);
-    },
-  });
-
-  const { isLoading: isLoadingDelete, mutate: mutateDelete } = useMutation({
-    mutationFn: (todo: Itodo) => removeTodo(todo),
+    mutationFn: (todo: Itodo) => updateOne(todo),
     onSuccess: () => {
       queryClient.invalidateQueries(['findAllTodos']);
     },
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (isLoadingUpdate) return;
     const updatedTodo = { ...todo, done: e.currentTarget.checked };
     mutateUpdate(updatedTodo);
   };
 
-  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (isLoadingDelete) return;
-    mutateDelete(todo);
+  const handleFav = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (isLoadingUpdate) return;
+    const updatedTodo = { ...todo, important: !todo.important };
+    mutateUpdate(updatedTodo);
   };
 
   const labelId = `checkbox-todo-${todo.id}`;
@@ -44,8 +40,8 @@ function TodoCard({ todo }: TodoCardProps) {
     <ListItem
       dense
       secondaryAction={
-        <IconButton onClick={handleDelete} edge="end" aria-label="delete/todo">
-          <DeleteIcon />
+        <IconButton onClick={handleFav} edge="end" aria-label="delete/todo">
+          {todo.important ? <StarIcon sx={{ color: 'primary.main'}} /> : <StarBorderIcon sx={{ color: 'primary.main'}} />}
         </IconButton>
       }
     >

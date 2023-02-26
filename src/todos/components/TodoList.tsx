@@ -6,12 +6,13 @@ import TodoCard from './TodoCard';
 
 import '../Todos.css';
 import { useState } from 'react';
+import { Itodo } from '../types';
 
-function TodoList() {
-  const { data } = useQuery({
-    queryKey: ['findAllTodos'],
-    queryFn: findAll,
-  });
+interface props {
+  todos: Itodo[] | undefined;
+}
+
+function TodoList({ todos }: props) {
   const [completedIsOpen, setCompletedIsOpen] = useState(false);
 
   const toggleCompletedList = () => {
@@ -23,12 +24,12 @@ function TodoList() {
   return (
     <>
       <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-        {data?.map((todo) => {
+        {todos?.map((todo) => {
           if (!todo.done)
             return <TodoCard key={`todo-${todo.id}`} todo={todo} />;
         })}
       </List>
-      {data?.some((item) => item.done) && (
+      {todos?.some((item) => item.done) && (
         <>
           <HeaderCompletedList
             toggleCompletedList={toggleCompletedList}
@@ -36,7 +37,7 @@ function TodoList() {
           />
           {completedIsOpen && (
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-              {data?.map((todo) => {
+              {todos?.map((todo) => {
                 if (todo.done)
                   return <TodoCard key={`todo-${todo.id}`} todo={todo} />;
               })}

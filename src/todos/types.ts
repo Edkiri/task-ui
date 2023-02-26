@@ -1,6 +1,7 @@
 export type Todo = {
   content: string;
   done: boolean;
+  important: boolean;
 };
 
 export type Itodo = Todo & {

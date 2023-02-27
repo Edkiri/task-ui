@@ -26,6 +26,9 @@ function MenuList() {
             <MenuItem iconEl={<GradeIcon />} title={MenuOptions.IMPORTANT} />
           </Link>
         </List>
+        <div className="DividerContainer">
+          <hr />
+        </div>
       </nav>
       <BackgroundLayout handleClick={closeMenu} />
     </>

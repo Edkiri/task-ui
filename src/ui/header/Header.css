@@ -11,3 +11,15 @@
     padding-top: 60px;
     border-right: 1px solid grey;
 }
+
+.DividerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.DividerContainer hr {
+    width: 85%;
+    display: block;
+    border-bottom: 1px solid gray;
+}

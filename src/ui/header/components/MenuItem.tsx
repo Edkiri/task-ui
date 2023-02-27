@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import {
   ListItem,
   ListItemButton,
@@ -32,6 +32,7 @@ function MenuItem({ title, iconEl }: MenuItemProps) {
         backgroundColor: `${
           optionSelected == title && 'rgba(255, 255, 255, 0.3)'
         }`,
+        borderLeft: `${optionSelected == title && '3px solid #90caf9'}`,
       }}
     >
       <ListItemButton sx={{ padding: '12px 20px' }} onClick={handleClick}>

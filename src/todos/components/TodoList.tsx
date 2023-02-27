@@ -4,7 +4,7 @@ import TodoCard from './TodoCard';
 
 import '../Todos.css';
 import { useState } from 'react';
-import { Itodo } from '../types';
+import { Itodo } from '../types/todo';
 
 interface props {
   todos: Itodo[] | undefined;

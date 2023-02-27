@@ -3,7 +3,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createOne } from '../services/api';
-import { Todo } from '../types';
+import { Todo } from '../types/todo';
 
 function NewTodoForm() {
   const queryClient = useQueryClient();

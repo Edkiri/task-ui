@@ -7,6 +7,7 @@ import {
 } from '@mui/material';
 import { MenuOptions } from './MenuList';
 import { MenuContext } from '../context/MenuContext';
+import useMenuQuantity from '../hooks/useMenuQuantity';
 
 interface MenuItemProps {
   iconEl: React.ReactNode;
@@ -15,6 +16,7 @@ interface MenuItemProps {
 
 function MenuItem({ title, iconEl }: MenuItemProps) {
   const { selectOption, optionSelected } = useContext(MenuContext);
+  const { quantity } = useMenuQuantity({ title });
 
   const handleClick = () => {
     selectOption(title);
@@ -35,6 +37,7 @@ function MenuItem({ title, iconEl }: MenuItemProps) {
       <ListItemButton sx={{ padding: '12px 20px' }} onClick={handleClick}>
         <ListItemIcon>{iconEl}</ListItemIcon>
         <ListItemText primary={title} />
+        <span>{quantity}</span>
       </ListItemButton>
     </ListItem>
   );

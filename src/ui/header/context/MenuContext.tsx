@@ -6,6 +6,7 @@ type MenuContextType = {
   toggleMenu: () => void;
   optionSelected: MenuOptions;
   selectOption: (option: MenuOptions) => void;
+  closeMenu: () => void;
 };
 
 export const MenuContext = createContext<MenuContextType>(
@@ -26,6 +27,10 @@ export function MenuProvider({ children }: props) {
     setIsOpen(!isOpen);
   };
 
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   const selectOption = (option: MenuOptions) => {
     if (option === optionSelected) return;
     setOptionSelected(option);
@@ -38,6 +43,7 @@ export function MenuProvider({ children }: props) {
         toggleMenu,
         optionSelected,
         selectOption,
+        closeMenu,
       }}
     >
       {children}

@@ -1,6 +1,4 @@
 import List from '@mui/material/List';
-import { useQuery } from '@tanstack/react-query';
-import { findAll } from '../services/api';
 import HeaderCompletedList from './HeaderCompletedList';
 import TodoCard from './TodoCard';
 

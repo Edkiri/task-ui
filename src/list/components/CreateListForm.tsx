@@ -2,20 +2,20 @@ import { TextField } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
 import '../List.css';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { List } from '../types/list';
 import { createOne } from '../services/list';
 
 function CreateListForm() {
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const [newList, setNewList] = useState('');
 
   const { isLoading, mutate } = useMutation({
     mutationFn: (listToCreate: List) => createOne(listToCreate),
     onSuccess: () => {
       setNewList('');
-      // queryClient.invalidateQueries(['findAllTodos']);
+      queryClient.invalidateQueries(['findAllLists']);
     },
   });
 

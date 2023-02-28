@@ -1,11 +1,10 @@
 import { createContext, useState } from 'react';
-import { MenuOptions } from '../components/MenuList';
 
 type MenuContextType = {
   isOpen: boolean;
   toggleMenu: () => void;
-  optionSelected: MenuOptions;
-  selectOption: (option: MenuOptions) => void;
+  menuTitleSelected: string;
+  selectMenuTitle: (title: string) => void;
   closeMenu: () => void;
 };
 
@@ -19,9 +18,7 @@ interface props {
 
 export function MenuProvider({ children }: props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [optionSelected, setOptionSelected] = useState<MenuOptions>(
-    MenuOptions.MYDAY,
-  );
+  const [menuTitleSelected, setMenuTitleSelected] = useState<string>('My Day');
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -31,9 +28,9 @@ export function MenuProvider({ children }: props) {
     setIsOpen(false);
   };
 
-  const selectOption = (option: MenuOptions) => {
-    if (option === optionSelected) return;
-    setOptionSelected(option);
+  const selectMenuTitle = (title: string) => {
+    if (title === menuTitleSelected) return;
+    setMenuTitleSelected(title);
     setIsOpen(false);
   };
   return (
@@ -41,8 +38,8 @@ export function MenuProvider({ children }: props) {
       value={{
         isOpen,
         toggleMenu,
-        optionSelected,
-        selectOption,
+        menuTitleSelected,
+        selectMenuTitle,
         closeMenu,
       }}
     >

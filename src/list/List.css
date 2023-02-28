@@ -1,0 +1,12 @@
+.CreateListForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.CreateListForm button {
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+}

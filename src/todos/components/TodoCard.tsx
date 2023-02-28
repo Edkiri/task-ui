@@ -6,7 +6,7 @@ import StarIcon from '@mui/icons-material/Star';
 
 import { Itodo } from '../types/todo';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateOne } from '../services/api';
+import { updateOne } from '../services/todo';
 import { IconButton, ListItem } from '@mui/material';
 
 export interface TodoCardProps {

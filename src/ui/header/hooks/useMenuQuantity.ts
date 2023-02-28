@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { findAll } from '../../../todos/services/api';
+import { findAll } from '../../../todos/services/todo';
 import { MenuOptions } from '../components/MenuList';
 
 interface props {

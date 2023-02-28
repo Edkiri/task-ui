@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { APIDeleteResponse, Todo, Itodo } from '../types/todo';
+import { APIDeleteResponse } from '../../types';
+import { Todo, Itodo } from '../types/todo';
 
 const client = axios.create({
   baseURL: 'http://localhost:3000/todos',

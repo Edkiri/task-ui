@@ -4,6 +4,6 @@ export type List = {
 
 export type IList = List & {
   id: number;
-  created_at: string;
-  slug_name: string;
+  createdAt: string;
+  slugName: string;
 };

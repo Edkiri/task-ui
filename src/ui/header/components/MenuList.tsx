@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import BackgroundLayout from '../../background-layout/BackgroundLayout';
 import { useContext } from 'react';
 import { MenuContext } from '../context/MenuContext';
+import CreateListForm from '../../../list/components/CreateListForm';
 
 export enum MenuOptions {
   MYDAY = 'My Day',
@@ -29,6 +30,7 @@ function MenuList() {
         <div className="DividerContainer">
           <hr />
         </div>
+        <CreateListForm />
       </nav>
       <BackgroundLayout handleClick={closeMenu} />
     </>

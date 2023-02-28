@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import TodoList from '../todos/components/TodoList';
-import { findAll } from '../todos/services/api';
+import { findAll } from '../todos/services/todo';
 
 function Important() {
   const { data } = useQuery({

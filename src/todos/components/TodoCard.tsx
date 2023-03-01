@@ -7,13 +7,24 @@ import StarIcon from '@mui/icons-material/Star';
 import { Itodo } from '../types/todo';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateOne, updateTodoInterface } from '../services/todo';
-import { IconButton, ListItem } from '@mui/material';
+import {
+  IconButton,
+  ListItem,
+  ListItemButton,
+  Typography,
+} from '@mui/material';
+
+import '../styles/TodoCard.css';
+import TodoMeta from './TodoMeta';
+import { useState } from 'react';
+import OptionsMenu from './OptionsMenu';
 
 export interface TodoCardProps {
   todo: Itodo;
+  openMenuOptions: (e: React.MouseEvent<HTMLDivElement | MouseEvent>) => void;
 }
 
-function TodoCard({ todo }: TodoCardProps) {
+function TodoCard({ todo, openMenuOptions }: TodoCardProps) {
   const queryClient = useQueryClient();
 
   const { isLoading: isLoadingUpdate, mutate: mutateUpdate } = useMutation({
@@ -43,35 +54,31 @@ function TodoCard({ todo }: TodoCardProps) {
 
   const labelId = `checkbox-todo-${todo.id}`;
   return (
-    <ListItem
-      dense
-      secondaryAction={
-        <IconButton onClick={handleFav} edge="end" aria-label="delete/todo">
-          {todo.important ? (
-            <StarIcon sx={{ color: 'primary.main' }} />
-          ) : (
-            <StarBorderIcon sx={{ color: 'primary.main' }} />
-          )}
-        </IconButton>
-      }
-    >
-      <ListItemIcon>
-        <Checkbox
-          edge="start"
-          checked={todo.done}
-          disabled={isLoadingUpdate}
-          onChange={handleChange}
-        />
-      </ListItemIcon>
-      <ListItemText
-        id={labelId}
-        primary={todo.content}
-        sx={{
-          textDecorationLine: `${todo.done && 'line-through'}`,
-          opacity: `${todo.done && '.7'}`,
-        }}
-      />
-    </ListItem>
+    <>
+      <ListItemButton
+        sx={{ padding: 0 }}
+        onContextMenu={(e) => openMenuOptions(e)}
+      >
+        <ListItem className="TodoCardLi" sx={{ padding: '4px 16px' }}>
+          <div className="TodoCheckBox">
+            <Checkbox
+              edge="start"
+              checked={todo.done}
+              disabled={isLoadingUpdate}
+              onChange={handleChange}
+            />
+          </div>
+          <TodoMeta todo={todo} />
+          <IconButton onClick={handleFav} edge="end" aria-label="fav/todo">
+            {todo.important ? (
+              <StarIcon sx={{ color: 'primary.main' }} />
+            ) : (
+              <StarBorderIcon sx={{ color: 'primary.main' }} />
+            )}
+          </IconButton>
+        </ListItem>
+      </ListItemButton>
+    </>
   );
 }
 

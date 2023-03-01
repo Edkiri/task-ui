@@ -1,0 +1,23 @@
+.OptionsMenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.16);
+    list-style: none;
+    margin: 0;
+}
+.OptionsMenu li {
+    margin: 0;
+    padding: 8px;
+}
+.OptionsMenu li button {
+    border: none;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+}
+.OptionsMenu li button:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+

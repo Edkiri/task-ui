@@ -1,0 +1,13 @@
+.TodoCardLi {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 4px 0px;
+}
+.TodoCardContent {
+    flex-grow: 1;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}

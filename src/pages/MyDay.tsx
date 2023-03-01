@@ -8,10 +8,11 @@ function MyDay() {
     queryKey: ['findAllTodos'],
     queryFn: findAll,
   });
+  const todos = data?.filter((item) => item.today);
   return (
     <>
-      <NewTodoForm></NewTodoForm>
-      <TodoList todos={data} />
+      <NewTodoForm />
+      <TodoList todos={todos} />
     </>
   );
 }

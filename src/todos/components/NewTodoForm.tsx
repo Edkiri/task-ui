@@ -3,14 +3,18 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createOne } from '../services/todo';
-import { Todo } from '../types/todo';
+import { APITypeCreateTodo } from '../types/todo';
 
-function NewTodoForm() {
+interface props {
+  listId?: number;
+}
+
+function NewTodoForm({ listId }: props) {
   const queryClient = useQueryClient();
   const [newTodo, setNewTodo] = useState('');
 
   const { isLoading, mutate } = useMutation({
-    mutationFn: (todoToCreate: Todo) => createOne(todoToCreate),
+    mutationFn: (todoToCreate: APITypeCreateTodo) => createOne(todoToCreate),
     onSuccess: () => {
       setNewTodo('');
       queryClient.invalidateQueries(['findAllTodos']);
@@ -24,7 +28,16 @@ function NewTodoForm() {
   const formSubmited = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!newTodo.trim()) return;
-    mutate({ content: newTodo, done: false, important: false });
+    const todoToCreate: APITypeCreateTodo = {
+      content: newTodo,
+      important: false,
+      today: true,
+    };
+    if (listId) {
+      todoToCreate.listId = listId;
+      todoToCreate.today = false;
+    }
+    mutate(todoToCreate);
   };
 
   return (

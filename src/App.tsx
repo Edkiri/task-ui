@@ -15,6 +15,7 @@ import { QueryClient } from '@tanstack/query-core';
 import { MenuProvider } from './ui/header/context/MenuContext';
 import Header from './ui/header/Header';
 import Important from './pages/Important';
+import ListPage from './pages/ListPage';
 
 const darkTheme = createTheme({
   palette: {
@@ -30,6 +31,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<MyDay />} />
           <Route path="/important" element={<Important />} />
+          <Route path="/list/:listSlugName" element={<ListPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>

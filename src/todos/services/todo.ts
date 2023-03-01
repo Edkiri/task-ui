@@ -1,21 +1,27 @@
 import axios from 'axios';
 import { APIDeleteResponse } from '../../types';
-import { Todo, Itodo } from '../types/todo';
+import { APITypeCreateTodo, APITypeUpdateTodo, Itodo } from '../types/todo';
 
 const client = axios.create({
   baseURL: 'http://localhost:3000/todos',
 });
 
-export async function createOne(todo: Todo) {
+export interface updateTodoInterface {
+  todoToUpdate: APITypeUpdateTodo;
+  todoId: number;
+}
+
+export async function createOne(todo: APITypeCreateTodo) {
   const { data } = await client.post<Itodo>('/', todo);
   return data;
 }
 
-export async function updateOne(todo: Itodo) {
-  const { data } = await client.put<Itodo>(`/${todo.id}`, {
-    done: todo.done,
-    important: todo.important,
-    content: todo.content,
+export async function updateOne({ todoToUpdate, todoId }: updateTodoInterface) {
+  const { data } = await client.put<Itodo>(`/${todoId}`, {
+    done: todoToUpdate.done,
+    important: todoToUpdate.important,
+    content: todoToUpdate.content,
+    today: todoToUpdate.today,
   });
   return data;
 }

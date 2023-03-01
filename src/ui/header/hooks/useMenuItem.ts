@@ -11,14 +11,23 @@ const useMenuItem = ({ title }: props) => {
     queryFn: findAll,
   });
 
-  if (title === 'Important')
-    return {
-      quantity: data?.filter((item) => item.important && !item.done).length,
-    };
+  if (title === 'Important') {
+    const quantity = data?.filter(
+      (item) => item.important && !item.done,
+    ).length;
+    if (!quantity) return { quantity: '' };
+    return { quantity };
+  }
+  if (title === 'My Day') {
+    const quantity = data?.filter((item) => item.today && !item.done).length;
+    if (!quantity) return { quantity: '' };
+    return { quantity };
+  }
 
-  let quantity = data?.filter(
-    (item) => item.list.title === title && !item.done,
+  let quantity: string | number | undefined = data?.filter(
+    (item) => item.list?.title === title && !item.done,
   ).length;
+  if (!quantity) quantity = '';
 
   return { quantity };
 };

@@ -6,7 +6,7 @@ import StarIcon from '@mui/icons-material/Star';
 
 import { Itodo } from '../types/todo';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateOne } from '../services/todo';
+import { updateOne, updateTodoInterface } from '../services/todo';
 import { IconButton, ListItem } from '@mui/material';
 
 export interface TodoCardProps {
@@ -17,7 +17,7 @@ function TodoCard({ todo }: TodoCardProps) {
   const queryClient = useQueryClient();
 
   const { isLoading: isLoadingUpdate, mutate: mutateUpdate } = useMutation({
-    mutationFn: (todo: Itodo) => updateOne(todo),
+    mutationFn: (playload: updateTodoInterface) => updateOne(playload),
     onSuccess: () => {
       queryClient.invalidateQueries(['findAllTodos']);
     },
@@ -26,13 +26,19 @@ function TodoCard({ todo }: TodoCardProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (isLoadingUpdate) return;
     const updatedTodo = { ...todo, done: e.currentTarget.checked };
-    mutateUpdate(updatedTodo);
+    mutateUpdate({
+      todoId: todo.id,
+      todoToUpdate: updatedTodo,
+    });
   };
 
   const handleFav = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (isLoadingUpdate) return;
     const updatedTodo = { ...todo, important: !todo.important };
-    mutateUpdate(updatedTodo);
+    mutateUpdate({
+      todoId: todo.id,
+      todoToUpdate: updatedTodo,
+    });
   };
 
   const labelId = `checkbox-todo-${todo.id}`;
@@ -41,7 +47,11 @@ function TodoCard({ todo }: TodoCardProps) {
       dense
       secondaryAction={
         <IconButton onClick={handleFav} edge="end" aria-label="delete/todo">
-          {todo.important ? <StarIcon sx={{ color: 'primary.main'}} /> : <StarBorderIcon sx={{ color: 'primary.main'}} />}
+          {todo.important ? (
+            <StarIcon sx={{ color: 'primary.main' }} />
+          ) : (
+            <StarBorderIcon sx={{ color: 'primary.main' }} />
+          )}
         </IconButton>
       }
     >

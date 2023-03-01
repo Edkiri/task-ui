@@ -1,4 +1,4 @@
-# Task API
+# Task UI
 Aplicación web para planear y organizar tareas.
 
 ### Los usuarios pueden:

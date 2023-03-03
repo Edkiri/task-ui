@@ -23,6 +23,11 @@ const useMenuItem = ({ title }: props) => {
     if (!quantity) return { quantity: '' };
     return { quantity };
   }
+  if (title === 'Tasks') {
+    const quantity = data?.filter((item) => !item.list && !item.done).length;
+    if (!quantity) return { quantity: '' };
+    return { quantity };
+  }
 
   let quantity: string | number | undefined = data?.filter(
     (item) => item.list?.title === title && !item.done,

@@ -3,6 +3,7 @@ import { List } from '@mui/material';
 import GradeIcon from '@mui/icons-material/Grade';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 
 import MenuItem from './MenuItem';
 import BackgroundLayout from '../../background-layout/BackgroundLayout';
@@ -34,6 +35,12 @@ function MenuList() {
                 title={'Important'}
                 url="/important"
               />
+              <MenuItem
+                iconEl={<AssignmentIcon />}
+                title={'Tasks'}
+                url="/tasks"
+              />
+              
               <div className="DividerContainer">
                 <hr />
               </div>

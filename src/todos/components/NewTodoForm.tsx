@@ -1,7 +1,8 @@
-import { Box, FormControl, InputLabel, OutlinedInput } from '@mui/material';
-import LoadingButton from '@mui/lab/LoadingButton';
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Box, FormControl, InputLabel, OutlinedInput } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
+
 import { createOne } from '../services/todo';
 import { APITypeCreateTodo } from '../types/todo';
 
@@ -41,7 +42,7 @@ function NewTodoForm({ listId }: props) {
   };
 
   return (
-    <form onSubmit={formSubmited}>
+    <form onSubmit={formSubmited} style={{ marginBottom: '1rem' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <FormControl fullWidth variant="outlined">
           <InputLabel htmlFor="newTodo">Add a task</InputLabel>

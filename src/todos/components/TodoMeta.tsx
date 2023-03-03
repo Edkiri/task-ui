@@ -1,4 +1,5 @@
 import { Typography } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
 import { Itodo } from '../types/todo';
 
@@ -7,8 +8,16 @@ interface props {
 }
 
 function TodoMeta({ todo }: props) {
+  const { listSlugName } = useParams();
+
+  let listName = '';
+
+  if (!listSlugName && todo.list) {
+    listName = todo.list.title;
+  }
+
   return (
-    <div className="TodoCardContent">
+    <>
       <Typography
         variant="subtitle1"
         gutterBottom
@@ -16,22 +25,27 @@ function TodoMeta({ todo }: props) {
           textDecorationLine: `${todo.done && 'line-through'}`,
           opacity: `${todo.done && '.7'}`,
           margin: 0,
-          fontWeight: 700,
+          textAlign: 'left',
+          display: 'flex',
+          alignItems: 'center',
+          lineHeight: '1.5rem'
         }}
       >
         {todo.content}
       </Typography>
-      <div className="metaData">
+      {listName && (
         <Typography
           variant="caption"
           display="block"
-          gutterBottom
           color={'text.secondary'}
+          textAlign={'left'}
+          lineHeight={'1rem'}
+          fontWeight={200}
         >
-          List name
+          {listName}
         </Typography>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 export default TodoMeta;

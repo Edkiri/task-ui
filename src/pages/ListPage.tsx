@@ -24,7 +24,7 @@ function ListPage() {
 
   return (
     <>
-      <h3>{currentList?.title}</h3>
+      <h2 style={{ marginLeft: '1rem' }}>{currentList?.title}</h2>
       <NewTodoForm listId={currentList?.id} />
       <TodoList todos={listTodos} />
     </>

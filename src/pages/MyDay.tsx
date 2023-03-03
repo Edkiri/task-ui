@@ -11,6 +11,7 @@ function MyDay() {
   const todos = data?.filter((item) => item.today);
   return (
     <>
+      <h2 style={{ marginLeft: '1rem' }} >My Day</h2>
       <NewTodoForm />
       <TodoList todos={todos} />
     </>

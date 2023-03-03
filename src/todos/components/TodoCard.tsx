@@ -1,36 +1,38 @@
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { IconButton } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { Itodo } from '../types/todo';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateOne, updateTodoInterface } from '../services/todo';
-import {
-  IconButton,
-  ListItem,
-  ListItemButton,
-  Typography,
-} from '@mui/material';
+import { removeTodo, updateOne, updateTodoInterface } from '../services/todo';
+import TodoMeta from './TodoMeta';
 
 import '../styles/TodoCard.css';
-import TodoMeta from './TodoMeta';
-import { useState } from 'react';
-import OptionsMenu from './OptionsMenu';
+import TodoOptionsMenu from './TodoOptionsMenu';
 
 export interface TodoCardProps {
   todo: Itodo;
-  openMenuOptions: (e: React.MouseEvent<HTMLDivElement | MouseEvent>) => void;
 }
 
-function TodoCard({ todo, openMenuOptions }: TodoCardProps) {
+function TodoCard({ todo }: TodoCardProps) {
   const queryClient = useQueryClient();
+  const [showOptions, setShowOptions] = useState(false);
 
   const { isLoading: isLoadingUpdate, mutate: mutateUpdate } = useMutation({
     mutationFn: (playload: updateTodoInterface) => updateOne(playload),
     onSuccess: () => {
       queryClient.invalidateQueries(['findAllTodos']);
+      setShowOptions(false);
+    },
+  });
+  const { isLoading: isLoadingDelete, mutate: mutateDelete } = useMutation({
+    mutationFn: (todo: Itodo) => removeTodo(todo),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['findAllTodos']);
+      setShowOptions(false);
     },
   });
 
@@ -43,7 +45,7 @@ function TodoCard({ todo, openMenuOptions }: TodoCardProps) {
     });
   };
 
-  const handleFav = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleFav = () => {
     if (isLoadingUpdate) return;
     const updatedTodo = { ...todo, important: !todo.important };
     mutateUpdate({
@@ -52,23 +54,37 @@ function TodoCard({ todo, openMenuOptions }: TodoCardProps) {
     });
   };
 
-  const labelId = `checkbox-todo-${todo.id}`;
+  const handleAddToMyDay = () => {
+    if (isLoadingUpdate) return;
+    mutateUpdate({
+      todoId: todo.id,
+      todoToUpdate: { today: true },
+    });
+  };
+
+  const handleRemoveFromMyDay = () => {
+    if (isLoadingUpdate) return;
+    mutateUpdate({
+      todoId: todo.id,
+      todoToUpdate: { today: false },
+    });
+  };
+  
+  const handleDeleteTodo = () => {
+    if (isLoadingDelete) return;
+    mutateDelete(todo);
+  };
+
   return (
     <>
-      <ListItemButton
-        sx={{ padding: 0 }}
-        onContextMenu={(e) => openMenuOptions(e)}
-      >
-        <ListItem className="TodoCardLi" sx={{ padding: '4px 16px' }}>
-          <div className="TodoCheckBox">
-            <Checkbox
-              edge="start"
-              checked={todo.done}
-              disabled={isLoadingUpdate}
-              onChange={handleChange}
-            />
-          </div>
-          <TodoMeta todo={todo} />
+      <li className="TodoCard">
+        <div className="TodoCardOptions">
+          <Checkbox
+            edge="start"
+            checked={todo.done}
+            disabled={isLoadingUpdate}
+            onChange={handleChange}
+          />
           <IconButton onClick={handleFav} edge="end" aria-label="fav/todo">
             {todo.important ? (
               <StarIcon sx={{ color: 'primary.main' }} />
@@ -76,8 +92,26 @@ function TodoCard({ todo, openMenuOptions }: TodoCardProps) {
               <StarBorderIcon sx={{ color: 'primary.main' }} />
             )}
           </IconButton>
-        </ListItem>
-      </ListItemButton>
+        </div>
+        <div className="TodoCardContent">
+          <TodoMeta todo={todo} />
+        </div>
+        <div className="TodoMenuIcon">
+          <div onClick={() => setShowOptions(!showOptions)}>
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
+          </div>
+          {showOptions && (
+            <TodoOptionsMenu
+              todo={todo}
+              addToMayDay={handleAddToMyDay}
+              removeFromMyDay={handleRemoveFromMyDay}
+              deleleTodo={handleDeleteTodo}
+            />
+          )}
+        </div>
+      </li>
     </>
   );
 }

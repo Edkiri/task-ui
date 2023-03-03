@@ -1,13 +1,61 @@
-.TodoCardLi {
+.TodoCard {
+    width: 100%;
+    min-height: 50px;
+    display: flex;
+    background-color: #252423;
+    color: white;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    position: static;
+    padding: 0.5rem 1.5rem;
+}
+
+.TodoCard:hover {
+    background-color: #3b3a39;
+}
+.TodoCardOptions {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    margin: 4px 0px;
 }
 .TodoCardContent {
-    flex-grow: 1;
-    text-align: left;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+    flex-grow: 1;
+    padding: 0 1.5rem;
+}
+.TodoMenuIcon {
+    position: relative;
+}
+.TodoOptionsMenu {
+    list-style: none;
+    background-color: #151917;
+    position: absolute;
+    z-index: 2;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0;
+    right: 30px;
+    top: 30px;
+    border-radius: 4px;
+    min-width: 220px;
+}
+.TodoOptionsMenu button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    width: 100%;
+}
+.TodoOptionsMenu button:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+.TodoMenuIcon {
+    display: flex;
+    align-items: center;
 }

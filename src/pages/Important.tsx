@@ -12,7 +12,7 @@ function Important() {
 
   return (
     <>
-      <h3 style={{ marginLeft: '1rem' }}>Important</h3>
+      <h2 style={{ marginLeft: '1rem' }}>Important</h2>
       <TodoList todos={importantTodos} />
     </>
   );

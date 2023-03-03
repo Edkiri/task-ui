@@ -69,7 +69,7 @@ function TodoCard({ todo }: TodoCardProps) {
       todoToUpdate: { today: false },
     });
   };
-  
+
   const handleDeleteTodo = () => {
     if (isLoadingDelete) return;
     mutateDelete(todo);
@@ -108,6 +108,7 @@ function TodoCard({ todo }: TodoCardProps) {
               addToMayDay={handleAddToMyDay}
               removeFromMyDay={handleRemoveFromMyDay}
               deleleTodo={handleDeleteTodo}
+              closeTodoOptions={() => setShowOptions(false)}
             />
           )}
         </div>

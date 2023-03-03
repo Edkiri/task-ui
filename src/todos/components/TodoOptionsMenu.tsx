@@ -1,12 +1,16 @@
+import { useRef } from 'react';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
 import { Itodo } from '../types/todo';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 
 interface props {
   todo: Itodo;
   addToMayDay: () => void;
   removeFromMyDay: () => void;
   deleleTodo: () => void;
+  closeTodoOptions: () => void;
 }
 
 export default function TodoOptionsMenu({
@@ -14,9 +18,12 @@ export default function TodoOptionsMenu({
   addToMayDay,
   removeFromMyDay,
   deleleTodo,
+  closeTodoOptions,
 }: props) {
+  const optionsMenuRef = useRef<HTMLUListElement | null>(null);
+  useOnClickOutside(optionsMenuRef, closeTodoOptions);
   return (
-    <ul className="TodoOptionsMenu">
+    <ul ref={optionsMenuRef} className="TodoOptionsMenu">
       <li>
         {todo.today ? (
           <button onClick={removeFromMyDay}>

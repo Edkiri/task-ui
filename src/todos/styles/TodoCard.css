@@ -87,12 +87,10 @@
     background-color: black;
     color: white;
     border: none;
-    padding: 1rem;
+    padding: 0.5rem;
     font-size: 1.2rem;
     flex-grow: 1;
     outline: none;
-    min-height: 63px;
-    max-width: 250px;
     resize: none;
 }
 .HeaderDetailsSidebar .ContentInput::-webkit-scrollbar {

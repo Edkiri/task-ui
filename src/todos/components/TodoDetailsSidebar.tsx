@@ -65,9 +65,13 @@ export default function TodoDetailsSidebar({
     const contentLength = textArea?.textLength;
     if (!contentLength) return;
     const initialHeight = Math.ceil(contentLength / 20);
-    textArea.style.height = `${initialHeight * 24 + 32}px`;
+    if (contentLength < 20) {
+      textArea.style.height = `${24 + 16}px`;
+    } else {
+      textArea.style.height = `${initialHeight * 24 + 16}px`;
+    }
     textArea?.addEventListener('keyup', (e: any) => {
-      textArea.style.height = `${24 + 32}px`;
+      textArea.style.height = `${24 + 16}px`;
       let scHeight = e.target.scrollHeight;
       textArea.style.height = `${scHeight}px`;
     });

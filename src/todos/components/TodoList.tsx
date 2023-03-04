@@ -4,6 +4,7 @@ import List from '@mui/material/List';
 import { Itodo } from '../types/todo';
 
 import HeaderCompletedList from './HeaderCompletedList';
+import TodoDetailsSidebar from './TodoDetailsSidebar';
 import TodoCard from './TodoCard';
 
 import '../Todos.css';
@@ -14,6 +15,7 @@ interface props {
 
 function TodoList({ todos }: props) {
   const [completedIsOpen, setCompletedIsOpen] = useState(false);
+  const [todoSelected, setTodoSelected] = useState<Itodo | null>(null);
 
   const toggleCompletedList = () => {
     setCompletedIsOpen((prevState) => {
@@ -21,7 +23,14 @@ function TodoList({ todos }: props) {
     });
   };
 
-  
+  const selectTodo = async (todo: Itodo | null) => {
+    await unselectTodo();
+    setTodoSelected(todo);
+  };
+
+  const unselectTodo = () => {
+    setTodoSelected(null);
+  };
 
   return (
     <>
@@ -32,6 +41,8 @@ function TodoList({ todos }: props) {
               <TodoCard
                 key={`todo-${todo.id}`}
                 todo={todo}
+                todoSelected={todoSelected}
+                selectTodo={selectTodo}
               />
             );
         })}
@@ -50,12 +61,21 @@ function TodoList({ todos }: props) {
                     <TodoCard
                       key={`todo-${todo.id}`}
                       todo={todo}
+                      selectTodo={selectTodo}
+                      todoSelected={todoSelected}
                     />
                   );
               })}
             </List>
           )}
         </>
+      )}
+      {todoSelected && (
+        <TodoDetailsSidebar
+          todo={todoSelected}
+          hideSidebar={unselectTodo}
+          selectTodo={selectTodo}
+        />
       )}
     </>
   );

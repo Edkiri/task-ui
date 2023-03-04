@@ -15,9 +15,11 @@ import TodoOptionsMenu from './TodoOptionsMenu';
 
 export interface TodoCardProps {
   todo: Itodo;
+  todoSelected: Itodo | null;
+  selectTodo: (todo: Itodo | null) => void;
 }
 
-function TodoCard({ todo }: TodoCardProps) {
+function TodoCard({ todo, todoSelected, selectTodo }: TodoCardProps) {
   const queryClient = useQueryClient();
   const [showOptions, setShowOptions] = useState(false);
 
@@ -75,9 +77,15 @@ function TodoCard({ todo }: TodoCardProps) {
     mutateDelete(todo);
   };
 
+  const handleOpenTodoDetails = () => {
+    selectTodo(todo);
+  };
+
   return (
     <>
-      <li className="TodoCard">
+      <li
+        className={`TodoCard ${todoSelected?.id === todo.id ? 'selected' : ''}`}
+      >
         <div className="TodoCardOptions">
           <Checkbox
             edge="start"
@@ -93,9 +101,9 @@ function TodoCard({ todo }: TodoCardProps) {
             )}
           </IconButton>
         </div>
-        <div className="TodoCardContent">
+        <button className="TodoCardContent" onClick={handleOpenTodoDetails}>
           <TodoMeta todo={todo} />
-        </div>
+        </button>
         <div className="TodoMenuIcon">
           <div onClick={() => setShowOptions(!showOptions)}>
             <IconButton>

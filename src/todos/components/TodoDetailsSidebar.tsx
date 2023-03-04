@@ -2,10 +2,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { Checkbox } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import StarIcon from '@mui/icons-material/Star';
 
 import { updateOne, updateTodoInterface } from '../services/todo';
 import { Itodo } from '../types/todo';
-import { FocusEvent, useCallback, useEffect, useState } from 'react';
+import { FocusEvent, useEffect, useRef, useState } from 'react';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
 
 interface props {
   todo: Itodo | null;
@@ -22,6 +26,9 @@ export default function TodoDetailsSidebar({
   const [todoContent, setTodoContent] = useState<string | undefined>(
     todo?.content,
   );
+
+  const sideBarRef = useRef<HTMLDivElement | null>(null);
+  useOnClickOutside(sideBarRef, hideSidebar);
 
   const { isLoading: isLoadingUpdate, mutate: mutateUpdate } = useMutation({
     mutationFn: (playload: updateTodoInterface) => updateOne(playload),
@@ -59,6 +66,24 @@ export default function TodoDetailsSidebar({
     });
   };
 
+  const handleAddToMyDay = () => {
+    if (isLoadingUpdate || !todo) return;
+    const updatedTodo = { ...todo, today: !todo.today };
+    mutateUpdate({
+      todoId: todo.id,
+      todoToUpdate: updatedTodo,
+    });
+  };
+
+  const handleMarkImportant = () => {
+    if (isLoadingUpdate || !todo) return;
+    const updatedTodo = { ...todo, important: !todo.important };
+    mutateUpdate({
+      todoId: todo.id,
+      todoToUpdate: updatedTodo,
+    });
+  };
+
   useEffect(() => {
     const textArea =
       document.querySelector<HTMLTextAreaElement>('.ContentInput');
@@ -83,7 +108,7 @@ export default function TodoDetailsSidebar({
   }, []);
 
   return (
-    <div className="TodoDetailsSidebar">
+    <div className="TodoDetailsSidebar" ref={sideBarRef}>
       <div className="TodoDetailtContainer">
         <div className="HeaderDetailsSidebar">
           <Checkbox
@@ -103,7 +128,27 @@ export default function TodoDetailsSidebar({
         <div className="DividerContainer">
           <hr />
         </div>
-        <div className="TodoDetailContent"></div>
+        <div className="TodoDetailContent">
+          <button
+            onClick={handleAddToMyDay}
+            style={{
+              color: `${todo?.today ? '#84b7e1' : 'white'}`,
+            }}
+          >
+            <WbSunnyIcon />
+            <span>{todo?.today ? 'Added to My day' : 'Add to My Day'}</span>
+          </button>
+          <button onClick={handleMarkImportant} style={{ color: 'white' }}>
+            {todo?.important ? (
+              <StarIcon sx={{ color: 'primary.main' }} />
+            ) : (
+              <StarBorderIcon sx={{ color: 'white' }} />
+            )}
+            <span>
+              {todo?.important ? 'Marked as important' : 'Mark as important'}
+            </span>
+          </button>
+        </div>
       </div>
       <button onClick={hideSidebar}>
         <CloseIcon sx={{ width: 50 }} />

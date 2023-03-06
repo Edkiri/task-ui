@@ -32,7 +32,7 @@ export default function ListHeader({ list }: props) {
     onSuccess: () => {
       queryClient.invalidateQueries(['findAllLists']);
       queryClient.invalidateQueries(['findAllTodos']);
-      navigate('');
+      navigate('/');
     },
   });
 

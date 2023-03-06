@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { APIDeleteResponse } from '../../types';
-import { IList, List } from '../types/list';
+import { IList, List, updateListInterface } from '../types/list';
 
 const client = axios.create({
   baseURL: 'http://localhost:3000/list',
@@ -11,10 +11,18 @@ export async function createOne(list: List) {
   return data;
 }
 
-export async function updateOne(list: IList) {
-  const { data } = await client.put<IList>(`/${list.id}`, {
-    title: list.title,
+export async function updateOne({ id, title }: updateListInterface) {
+  const { data } = await client.put<IList>(`/${id}`, {
+    title,
   });
+  return data;
+}
+
+export interface findBySlugInterface {
+  slugName: string;
+}
+export async function getOne({ slugName }: findBySlugInterface) {
+  const { data } = await client.get<IList>(`/${slugName}`);
   return data;
 }
 
@@ -26,7 +34,7 @@ export async function findAll() {
   return data;
 }
 
-export async function remove(list: IList) {
-  const { data } = await client.delete<APIDeleteResponse>(`/${list.id}`);
+export async function remove(id: number) {
+  const { data } = await client.delete<APIDeleteResponse>(`/${id}`);
   return data;
 }

@@ -7,3 +7,8 @@ export type IList = List & {
   createdAt: string;
   slugName: string;
 };
+
+export interface updateListInterface {
+  id: number;
+  title: string;
+}

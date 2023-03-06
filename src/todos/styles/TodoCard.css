@@ -104,12 +104,19 @@
     background-color: transparent;
     color: white;
 }
-.TodoDetailsSidebar > button {
+.FooterSidebar {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.FooterSidebar > button {
     border: none;
     background-color: transparent;
     color: white;
-    align-self: flex-end;
-    justify-self: end;
+    position: absolute;
+    right: 8px;
+    bottom: 17px;
+    cursor: pointer;
 }
 .TodoDetailContent {
     margin-top: 1rem;

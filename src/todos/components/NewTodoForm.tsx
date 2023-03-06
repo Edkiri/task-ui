@@ -38,6 +38,7 @@ function NewTodoForm({ listId }: props) {
       todoToCreate.listId = listId;
       todoToCreate.today = false;
     }
+    if (location.pathname === '/tasks') todoToCreate.today = false;
     mutate(todoToCreate);
   };
 

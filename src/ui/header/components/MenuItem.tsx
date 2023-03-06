@@ -38,7 +38,7 @@ function MenuItem({ title, url, iconEl }: MenuItemProps) {
         }}
       >
         <ListItemButton sx={{ padding: '12px 20px' }} onClick={handleClick}>
-          <ListItemIcon>{iconEl}</ListItemIcon>
+          <ListItemIcon sx={{ width: 25 }}>{iconEl}</ListItemIcon>
           <ListItemText primary={title} />
           <span>{quantity}</span>
         </ListItemButton>

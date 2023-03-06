@@ -12,7 +12,7 @@ import { FocusEvent, useEffect, useRef, useState } from 'react';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 
 interface props {
-  todo: Itodo | null;
+  todo: Itodo;
   selectTodo: (todo: Itodo | null) => void;
   hideSidebar: () => void;
 }
@@ -26,6 +26,11 @@ export default function TodoDetailsSidebar({
   const [todoContent, setTodoContent] = useState<string | undefined>(
     todo?.content,
   );
+  const createdAt = new Date(todo.createdAt).toLocaleString('en-US', {
+    weekday: 'short',
+    month: 'long',
+    day: 'numeric',
+  });
 
   const sideBarRef = useRef<HTMLDivElement | null>(null);
   useOnClickOutside(sideBarRef, hideSidebar);
@@ -150,9 +155,14 @@ export default function TodoDetailsSidebar({
           </button>
         </div>
       </div>
-      <button onClick={hideSidebar}>
-        <CloseIcon sx={{ width: 50 }} />
-      </button>
+      <div className="FooterSidebar">
+        <button onClick={hideSidebar}>
+          <CloseIcon sx={{ width: 20 }} />
+        </button>
+        <p style={{ fontSize: '0.9rem', width: '100%', textAlign: 'center' }}>
+          Created on {createdAt}
+        </p>
+      </div>
     </div>
   );
 }

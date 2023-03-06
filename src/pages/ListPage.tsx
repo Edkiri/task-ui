@@ -24,8 +24,6 @@ function ListPage() {
     setCurrentList(lists?.find((item) => item.slugName === listSlugName));
   }, [listSlugName, lists]);
 
-  console.log(currentList);
-
   const { data: todos } = useQuery({
     queryKey: ['findAllTodos'],
     queryFn: findAllTodos,

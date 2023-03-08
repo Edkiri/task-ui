@@ -239,6 +239,7 @@ input[type="date"] {
     color: #84b7e1;
     margin-top: 0.5rem;
     cursor: pointer;
+    width: 80%;
 }
 .SaveButton:hover {
     background-color: #84b7e1;
@@ -249,5 +250,11 @@ input[type="date"] {
 .MetaDataContainer {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.6rem;
+}
+.LitleDot {
+    background-color: #bebdbd;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
 }

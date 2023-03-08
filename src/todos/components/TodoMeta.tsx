@@ -72,6 +72,9 @@ function TodoMeta({ todo }: props) {
             {listName}
           </Typography>
         )}
+        {(listName && dueTitle) && (
+          <div className="LitleDot"></div>
+        )}
         {dueTitle && (
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
             <CalendarMonthIcon

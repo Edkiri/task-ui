@@ -8,10 +8,20 @@ function MyDay() {
     queryKey: ['findAllTodos'],
     queryFn: findAll,
   });
-  const todos = data?.filter((item) => item.today);
+
+  const todos = data?.filter((item) => {
+    if (item.today) return item;
+    let expiresToday = false;
+    if (item.expiresOn) {
+      expiresToday =
+        new Date(item.expiresOn).toDateString() === new Date().toDateString();
+    }
+    if (expiresToday) return item;
+  });
+
   return (
     <>
-      <h2 style={{ marginLeft: '1rem' }} >My Day</h2>
+      <h2 style={{ marginLeft: '1rem' }}>My Day</h2>
       <NewTodoForm />
       <TodoList todos={todos} />
     </>

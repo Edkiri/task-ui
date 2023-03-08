@@ -10,6 +10,7 @@ import { updateOne, updateTodoInterface } from '../services/todo';
 import { Itodo } from '../types/todo';
 import { FocusEvent, useEffect, useRef, useState } from 'react';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
+import DateOptions from './DateOptions';
 
 interface props {
   todo: Itodo;
@@ -45,7 +46,7 @@ export default function TodoDetailsSidebar({
 
   const checkboxChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (isLoadingUpdate || !todo) return;
-    const updatedTodo = { ...todo, done: e.currentTarget.checked };
+    const updatedTodo = { done: e.currentTarget.checked };
     mutateUpdate({
       todoId: todo.id,
       todoToUpdate: updatedTodo,
@@ -64,7 +65,7 @@ export default function TodoDetailsSidebar({
       !todoContent?.trim()
     )
       return;
-    const updatedTodo = { ...todo, content: todoContent };
+    const updatedTodo = { content: todoContent };
     mutateUpdate({
       todoId: todo.id,
       todoToUpdate: updatedTodo,
@@ -73,7 +74,7 @@ export default function TodoDetailsSidebar({
 
   const handleAddToMyDay = () => {
     if (isLoadingUpdate || !todo) return;
-    const updatedTodo = { ...todo, today: !todo.today };
+    const updatedTodo = { today: !todo.today };
     mutateUpdate({
       todoId: todo.id,
       todoToUpdate: updatedTodo,
@@ -82,7 +83,7 @@ export default function TodoDetailsSidebar({
 
   const handleMarkImportant = () => {
     if (isLoadingUpdate || !todo) return;
-    const updatedTodo = { ...todo, important: !todo.important };
+    const updatedTodo = { important: !todo.important };
     mutateUpdate({
       todoId: todo.id,
       todoToUpdate: updatedTodo,
@@ -153,6 +154,7 @@ export default function TodoDetailsSidebar({
               {todo?.important ? 'Marked as important' : 'Mark as important'}
             </span>
           </button>
+          <DateOptions selectTodo={selectTodo} todo={todo} />
         </div>
       </div>
       <div className="FooterSidebar">

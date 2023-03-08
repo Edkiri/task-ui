@@ -121,7 +121,7 @@
 .TodoDetailContent {
     margin-top: 1rem;
 }
-.TodoDetailContent button {
+.TodoDetailContent > button {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -132,7 +132,83 @@
     border-radius: 4px;
     margin-bottom: 0.5rem;
 } 
-.TodoDetailContent button:hover {
+.TodoDetailContent > button:hover {
     background-color: #252423;
     cursor: pointer;
+}
+
+.DateOptionsList {
+    list-style: none;
+    background-color: #151917;
+    position: absolute;
+    left: 35px;
+    top: 38px;
+    z-index: 2;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0;
+    border-radius: 4px;
+    min-width: 220px;
+}
+.DateOptionsList button {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: none;
+    background-color: transparent;
+    padding: 0.7rem 1rem;
+    width: 100%;
+    border-radius: 4px;
+    color: white;
+}
+.DateOptionsList button:hover {
+    background-color: #252423;
+    cursor: pointer;
+}
+.DateOptionsList h4 {
+    text-align: center;
+    margin: 0;
+    margin-top: 4px;
+}
+.DateOptionsContainer {
+    position: relative;
+}
+.DueTodayButtonContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.08);
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+.DueTodayButtonContainer:hover {
+    background-color: #252423;
+}
+.DueTodayButtonContainer > button:not(.DeleteDueDateButton) {
+    padding: 0.7rem 1rem;
+    display: flex;
+    flex-grow: 1;
+    border: none;
+    background-color: transparent;
+    align-items: center;
+    gap: 1rem;
+}
+.DeleteDueDateButton {
+    margin-right: 1rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: white;
+}
+.DeleteDueDateButton,
+.DeleteDueDateButton svg
+ {
+    display: none;
+    width: 20px;
+}
+.DueTodayButtonContainer:hover .DeleteDueDateButton.expires,
+.DueTodayButtonContainer:hover .DeleteDueDateButton.expires svg {
+    display: block;
 }

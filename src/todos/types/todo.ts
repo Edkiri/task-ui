@@ -7,6 +7,7 @@ export type Itodo = {
   done?: boolean;
   important?: boolean;
   today?: boolean;
+  expiresOn?: Date | null;
   list: IList;
 };
 
@@ -23,4 +24,5 @@ export type APITypeUpdateTodo = {
   important?: boolean;
   done?: boolean;
   listId?: number;
+  expiresOn?: Date | null;
 };

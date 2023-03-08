@@ -17,12 +17,7 @@ export async function createOne(todo: APITypeCreateTodo) {
 }
 
 export async function updateOne({ todoToUpdate, todoId }: updateTodoInterface) {
-  const { data } = await client.put<Itodo>(`/${todoId}`, {
-    done: todoToUpdate.done,
-    important: todoToUpdate.important,
-    content: todoToUpdate.content,
-    today: todoToUpdate.today,
-  });
+  const { data } = await client.put<Itodo>(`/${todoId}`, todoToUpdate);
   return data;
 }
 

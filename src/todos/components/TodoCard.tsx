@@ -40,7 +40,7 @@ function TodoCard({ todo, todoSelected, selectTodo }: TodoCardProps) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (isLoadingUpdate) return;
-    const updatedTodo = { ...todo, done: e.currentTarget.checked };
+    const updatedTodo = { done: e.currentTarget.checked };
     mutateUpdate({
       todoId: todo.id,
       todoToUpdate: updatedTodo,
@@ -49,7 +49,7 @@ function TodoCard({ todo, todoSelected, selectTodo }: TodoCardProps) {
 
   const handleFav = () => {
     if (isLoadingUpdate) return;
-    const updatedTodo = { ...todo, important: !todo.important };
+    const updatedTodo = { important: !todo.important };
     mutateUpdate({
       todoId: todo.id,
       todoToUpdate: updatedTodo,

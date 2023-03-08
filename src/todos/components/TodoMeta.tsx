@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 import { Itodo } from '../types/todo';
 
@@ -16,6 +17,31 @@ function TodoMeta({ todo }: props) {
     listName = todo.list.title;
   }
 
+  const expiresDate = todo.expiresOn;
+  const today = new Date();
+  const tomorrow = new Date(new Date().setDate(today.getDate() + 1));
+  let expiresToday = false;
+  let expiresTomorrow = false;
+  if (expiresDate) {
+    expiresToday =
+      new Date(expiresDate).toDateString() === today.toDateString();
+    expiresTomorrow =
+      new Date(expiresDate).toDateString() === tomorrow.toDateString();
+  }
+  let dueTitle = 'Add due date';
+  if (expiresDate) {
+    if (expiresToday) dueTitle = 'Today';
+    if (expiresTomorrow) dueTitle = 'Tomorrow';
+    if (!expiresToday && !expiresTomorrow) {
+      const dueOn = new Date(expiresDate).toLocaleString('en-US', {
+        weekday: 'short',
+        month: 'long',
+        day: 'numeric',
+      });
+      dueTitle = `Due ${dueOn}`;
+    }
+  }
+
   return (
     <>
       <Typography
@@ -28,23 +54,42 @@ function TodoMeta({ todo }: props) {
           textAlign: 'left',
           display: 'flex',
           alignItems: 'center',
-          lineHeight: '1.5rem'
+          lineHeight: '1.5rem',
         }}
       >
         {todo.content}
       </Typography>
-      {listName && (
-        <Typography
-          variant="caption"
-          display="block"
-          color={'text.secondary'}
-          textAlign={'left'}
-          lineHeight={'1rem'}
-          fontWeight={200}
-        >
-          {listName}
-        </Typography>
-      )}
+      <div className="MetaDataContainer">
+        {listName && (
+          <Typography
+            variant="caption"
+            display="block"
+            color={'text.secondary'}
+            textAlign={'left'}
+            lineHeight={'1rem'}
+            fontWeight={200}
+          >
+            {listName}
+          </Typography>
+        )}
+        {dueTitle && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+            <CalendarMonthIcon
+              sx={{ color: 'text.secondary', width: '15px' }}
+            />
+            <Typography
+              variant="caption"
+              display="block"
+              color={'text.secondary'}
+              textAlign={'left'}
+              lineHeight={'1rem'}
+              fontWeight={200}
+            >
+              {dueTitle}
+            </Typography>
+          </div>
+        )}
+      </div>
     </>
   );
 }

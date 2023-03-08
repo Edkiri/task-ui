@@ -7,7 +7,7 @@
     margin-bottom: 0.5rem;
     border-radius: 8px;
     position: static;
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem;
 }
 
 .TodoCard:hover, .TodoCard.selected {
@@ -16,6 +16,8 @@
 .TodoCardOptions {
     display: flex;
     align-items: center;
+    min-width: 55px;
+    justify-content: space-between;
 }
 .TodoCardContent {
     cursor: pointer;
@@ -27,7 +29,7 @@
     border: none;
     background-color: transparent;
     color: white;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
 
 }
 .TodoMenuIcon {
@@ -148,8 +150,9 @@
     padding: 0;
     border-radius: 4px;
     min-width: 220px;
+    padding-bottom: 1rem;
 }
-.DateOptionsList button {
+.DateOptionsList li > button {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -160,7 +163,7 @@
     border-radius: 4px;
     color: white;
 }
-.DateOptionsList button:hover {
+.DateOptionsList li > button:hover {
     background-color: #252423;
     cursor: pointer;
 }
@@ -211,4 +214,40 @@
 .DueTodayButtonContainer:hover .DeleteDueDateButton.expires,
 .DueTodayButtonContainer:hover .DeleteDueDateButton.expires svg {
     display: block;
+}
+
+input[type="date"] {
+    background-color: transparent;
+    border: none;
+    color: white;
+    width: 100%;
+    padding: 0.7rem 1rem;
+    outline: none;
+    font-size: 1rem;
+}
+.DataPickerContiner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.SaveButton {
+    border: 1px solid #84b7e1;
+    font-weight: 700;
+    border-radius: 4px;
+    background-color: transparent;
+    padding: 6px 1rem;
+    color: #84b7e1;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
+.SaveButton:hover {
+    background-color: #84b7e1;
+    border: 1px solid #151917;
+    color: #151917;
+}
+
+.MetaDataContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }

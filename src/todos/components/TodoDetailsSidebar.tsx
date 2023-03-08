@@ -161,7 +161,14 @@ export default function TodoDetailsSidebar({
         <button onClick={hideSidebar}>
           <CloseIcon sx={{ width: 20 }} />
         </button>
-        <p style={{ fontSize: '0.9rem', width: '100%', textAlign: 'center' }}>
+        <p
+          style={{
+            fontSize: '0.9rem',
+            width: '100%',
+            textAlign: 'center',
+            color: '#b2b2b2',
+          }}
+        >
           Created on {createdAt}
         </p>
       </div>

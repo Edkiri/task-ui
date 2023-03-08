@@ -92,8 +92,9 @@ function TodoCard({ todo, todoSelected, selectTodo }: TodoCardProps) {
             checked={todo.done}
             disabled={isLoadingUpdate}
             onChange={handleChange}
+            sx={{ padding: 0, margin: 0 }}
           />
-          <IconButton onClick={handleFav} edge="end" aria-label="fav/todo">
+          <IconButton onClick={handleFav} edge="end" sx={{ padding: 0, margin: 0 }}>
             {todo.important ? (
               <StarIcon sx={{ color: 'primary.main' }} />
             ) : (

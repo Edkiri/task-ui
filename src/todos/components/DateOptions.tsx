@@ -7,6 +7,7 @@ import TodayIcon from '@mui/icons-material/Today';
 import { Itodo } from '../types/todo';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 import { updateOne, updateTodoInterface } from '../services/todo';
+import DataPicker from '../../ui/data-picker/DataPicker';
 
 interface props {
   todo: Itodo;
@@ -33,7 +34,14 @@ export default function DateOptions({ todo, selectTodo }: props) {
   if (expiresDate) {
     if (expiresToday) dueTitle = 'Today';
     if (expiresTomorrow) dueTitle = 'Tomorrow';
-    if (!expiresToday && !expiresTomorrow) dueTitle = 'Otra cosa';
+    if (!expiresToday && !expiresTomorrow) {
+      const dueOn = new Date(expiresDate).toLocaleString('en-US', {
+        weekday: 'short',
+        month: 'long',
+        day: 'numeric',
+      });
+      dueTitle = `Due ${dueOn}`;
+    }
   }
 
   const { isLoading: isLoadingUpdate, mutate: mutateUpdate } = useMutation({
@@ -85,6 +93,14 @@ export default function DateOptions({ todo, selectTodo }: props) {
 
   useOnClickOutside(sideOptionsList, hideOptions);
 
+  const handleDatePicker = (date: Date) => {
+    if (isLoadingUpdate) return;
+    mutateUpdate({
+      todoId: todo.id,
+      todoToUpdate: { expiresOn: date },
+    });
+  };
+
   return (
     <div className="DateOptionsContainer">
       <div className="DueTodayButtonContainer">
@@ -124,10 +140,9 @@ export default function DateOptions({ todo, selectTodo }: props) {
             <hr />
           </div>
           <li>
-            <button>
-              <CalendarMonthIcon sx={{ fontSize: '1.2rem' }} />
-              <span>Pick a date</span>
-            </button>
+            <div className="DataPickerButtonContainer">
+              <DataPicker onSave={handleDatePicker} />
+            </div>
           </li>
         </ul>
       )}

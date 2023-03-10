@@ -11,6 +11,9 @@ import './Header.css';
 function Header() {
   const { isOpen, toggleMenu } = useContext(MenuContext);
 
+  const path = window.location.pathname;
+  const displayMenu = path !== '/signup' && path !== '/login';
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -21,7 +24,11 @@ function Header() {
               edge="start"
               color="inherit"
               aria-label="menu"
-              sx={{ mr: 2, zIndex: 3 }}
+              sx={{
+                mr: 2,
+                zIndex: 3,
+                display: `${displayMenu ? 'block' : 'none'}`,
+              }}
               onClick={toggleMenu}
             >
               <MenuIcon />

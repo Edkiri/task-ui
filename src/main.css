@@ -2,3 +2,17 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+.RegisterFormContainer {
+    width: 100%;
+    max-width: 350px;
+}
+.RegisterFormContainer h2 {
+    text-align: center;
+}
+.RegisterFormContainer form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}

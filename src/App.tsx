@@ -17,6 +17,8 @@ import Header from './ui/header/Header';
 import Important from './pages/Important';
 import ListPage from './pages/ListPage';
 import TasksPage from './pages/TasksPage';
+import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
 
 const darkTheme = createTheme({
   palette: {
@@ -28,9 +30,11 @@ export function App() {
   return (
     <>
       <Header />
-      <Container maxWidth="md" sx={{ mt: 2 }}>
+      <Container maxWidth="md">
         <Routes>
           <Route path="/" element={<MyDay />} />
+          <Route path="/signup" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/important" element={<Important />} />
           <Route path="/tasks" element={<TasksPage />} />
           <Route path="/list/:listSlugName" element={<ListPage />} />

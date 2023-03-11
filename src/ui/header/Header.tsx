@@ -7,6 +7,7 @@ import { MenuContext } from './context/MenuContext';
 import MenuList from './components/MenuList';
 
 import './Header.css';
+import UserProfile from './components/UserProfile';
 
 function Header() {
   const { isOpen, toggleMenu } = useContext(MenuContext);
@@ -15,32 +16,38 @@ function Header() {
   const displayMenu = path !== '/signup' && path !== '/login';
 
   return (
-    <>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{
-                mr: 2,
-                zIndex: 3,
-                display: `${displayMenu ? 'block' : 'none'}`,
-              }}
-              onClick={toggleMenu}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Goals
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </Box>
+    <div className="Header">
+      <AppBar
+        position="static"
+        sx={{
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexDirection: 'row',
+          padding: '0px 1rem',
+        }}
+      >
+        <Toolbar sx={{ padding: 0, gap: '0.5rem' }}>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{
+              zIndex: 3,
+              display: `${displayMenu ? 'block' : 'none'}`,
+            }}
+            onClick={toggleMenu}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Goals
+          </Typography>
+        </Toolbar>
+        <UserProfile />
+      </AppBar>
       {isOpen && <MenuList />}
-    </>
+    </div>
   );
 }
 

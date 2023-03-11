@@ -1,7 +1,8 @@
-import { Box, Button, TextField } from '@mui/material';
 import { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postLoginUser } from '../user/services/api';
+import { Box, Button, TextField } from '@mui/material';
+import GoogleIcon from '@mui/icons-material/Google';
+import { postLoginUser, signinWithGoogle } from '../user/services/api';
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -60,6 +61,17 @@ function LoginPage() {
             Login
           </Button>
         </form>
+        <div className="DividerContainer">
+          <hr />
+        </div>
+        <span>Or</span>
+        <a
+          href="http://localhost:3000/api/auth/google/login"
+          className="GoogleAuth"
+        >
+          <GoogleIcon sx={{ fontSize: '35px' }} />
+          <span>Sign in with Google</span>
+        </a>
       </div>
     </Box>
   );

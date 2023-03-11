@@ -8,3 +8,9 @@ export interface UserLoginParams {
   email: string;
   password: string;
 }
+
+export interface User {
+  displayName: string;
+  id: number;
+  avatarUrl?: string;
+}

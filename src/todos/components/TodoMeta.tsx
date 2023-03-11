@@ -28,7 +28,7 @@ function TodoMeta({ todo }: props) {
     expiresTomorrow =
       new Date(expiresDate).toDateString() === tomorrow.toDateString();
   }
-  let dueTitle = 'Add due date';
+  let dueTitle = '';
   if (expiresDate) {
     if (expiresToday) dueTitle = 'Today';
     if (expiresTomorrow) dueTitle = 'Tomorrow';
@@ -78,7 +78,7 @@ function TodoMeta({ todo }: props) {
         {dueTitle && (
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
             <CalendarMonthIcon
-              sx={{ color: 'text.secondary', width: '15px' }}
+              sx={{ color: 'text.secondary', width: '15px', height: 'auto' }}
             />
             <Typography
               variant="caption"

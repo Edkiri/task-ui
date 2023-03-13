@@ -39,6 +39,7 @@ function CreateListForm() {
         value={newList}
         onChange={listChanged}
         disabled={isLoading}
+        sx={{ width: '100%' }}
       />
       <button type="submit" disabled={isLoading}>
         <AddIcon />

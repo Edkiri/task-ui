@@ -3,6 +3,10 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    padding: 0px 1rem;
+}
+.CreateListForm input {
+    flex-grow: 1;
 }
 .CreateListForm button {
     border: none;

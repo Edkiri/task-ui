@@ -3,7 +3,7 @@ import { APIDeleteResponse } from '../../types';
 import { APITypeCreateTodo, APITypeUpdateTodo, Itodo } from '../types/todo';
 
 const client = axios.create({
-  baseURL: 'http://localhost:3000/api/todos',
+  baseURL: `${import.meta.env.VITE_REACT_APP_API_URL}/todos`,
 });
 const config: AxiosRequestConfig = { withCredentials: true };
 

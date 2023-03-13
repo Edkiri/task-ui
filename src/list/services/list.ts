@@ -3,7 +3,7 @@ import { APIDeleteResponse } from '../../types';
 import { IList, List, updateListInterface } from '../types/list';
 
 const client = axios.create({
-  baseURL: 'http://localhost:3000/api/list',
+  baseURL: `${import.meta.env.VITE_REACT_APP_API_URL}/list`,
 });
 const config: AxiosRequestConfig = { withCredentials: true };
 

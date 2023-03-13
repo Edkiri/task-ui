@@ -1,6 +1,8 @@
+import { PropsWithChildren, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MyDay from './pages/MyDay';
 import NotFound from './pages/NotFound';
+import { AuthContext } from './user/AuthContext';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -19,6 +21,8 @@ import ListPage from './pages/ListPage';
 import TasksPage from './pages/TasksPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
+import { AuthenticatedRoute } from './user/AuthenticatedRoute';
+import { User } from './user/types';
 
 const darkTheme = createTheme({
   palette: {
@@ -26,22 +30,58 @@ const darkTheme = createTheme({
   },
 });
 
-export function App() {
+type Props = {
+  user?: User;
+  setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+};
+
+function AppWithProviders({
+  children,
+  user,
+  setUser,
+}: PropsWithChildren & Props) {
   return (
-    <>
-      <Header />
-      <Container maxWidth="md">
-        <Routes>
-          <Route path="/" element={<MyDay />} />
-          <Route path="/signup" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/important" element={<Important />} />
-          <Route path="/tasks" element={<TasksPage />} />
-          <Route path="/list/:listSlugName" element={<ListPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Container>
-    </>
+    <MenuProvider>
+      <AuthContext.Provider value={{ user, updateAuthUser: setUser }}>
+        {children}
+      </AuthContext.Provider>
+    </MenuProvider>
+  );
+}
+
+export function App() {
+  const [user, setUser] = useState<User>();
+  return (
+    <AppWithProviders user={user} setUser={setUser}>
+      <>
+        <Header />
+        <Container maxWidth="md">
+          <Routes>
+            <Route path="/signup" element={<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />} />
+
+            <Route
+              path="/"
+              element={<AuthenticatedRoute children={<MyDay />} />}
+            />
+            <Route
+              path="/important"
+              element={<AuthenticatedRoute children={<Important />} />}
+            />
+            <Route
+              path="/tasks"
+              element={<AuthenticatedRoute children={<TasksPage />} />}
+            />
+            <Route
+              path="/list/:listSlugName"
+              element={<AuthenticatedRoute children={<ListPage />} />}
+            />
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Container>
+      </>
+    </AppWithProviders>
   );
 }
 
@@ -53,9 +93,7 @@ export function WrappedApp() {
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={darkTheme}>
           <CssBaseline />
-          <MenuProvider>
-            <App />
-          </MenuProvider>
+          <App />
         </ThemeProvider>
       </QueryClientProvider>
     </BrowserRouter>

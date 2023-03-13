@@ -1,17 +1,8 @@
-import { useState, useEffect } from 'react';
-import { getUserFromSession } from '../../../user/services/api';
-import { User } from '../../../user/types';
+import { useContext } from 'react';
+import { AuthContext } from '../../../user/AuthContext';
 
 function UserProfile() {
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    getUserFromSession()
-      .then((res) => {
-        setUser(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const { user } = useContext(AuthContext);
 
   return (
     <div

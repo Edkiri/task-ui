@@ -2,7 +2,7 @@ import { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, TextField } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
-import { postLoginUser, signinWithGoogle } from '../user/services/api';
+import { postLoginUser } from '../user/services/api';
 
 function LoginPage() {
   const navigate = useNavigate();

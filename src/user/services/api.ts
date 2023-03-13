@@ -12,4 +12,6 @@ export const postRegisterUser = (data: UserCredentialsParams) =>
 export const postLoginUser = (data: UserLoginParams) =>
   client.post(`/auth/login`, data, config);
 
+export const logout = () => client.post('auth/logout', {}, config);
+
 export const getUserFromSession = () => client.get<User>('user', config);

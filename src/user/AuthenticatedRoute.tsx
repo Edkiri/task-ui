@@ -1,7 +1,6 @@
 import React, { FC, useContext, useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { AuthContext } from './AuthContext';
-import { getUserFromSession } from './services/api';
+import { Loading } from '../ui/loding/Loading';
 import { useAuth } from './useAuth';
 
 export const AuthenticatedRoute: FC<React.PropsWithChildren> = ({
@@ -11,7 +10,7 @@ export const AuthenticatedRoute: FC<React.PropsWithChildren> = ({
   const { loading, user } = useAuth();
 
   if (loading) {
-    return <div>loading</div>;
+    return <Loading />;
   }
   if (user) return <>{children}</>;
   return <Navigate to="/login" state={{ from: location }} replace />;

@@ -37,8 +37,8 @@ function MenuItem({ title, url, iconEl }: MenuItemProps) {
           borderLeft: `${menuTitleSelected == title && '3px solid #90caf9'}`,
         }}
       >
-        <ListItemButton sx={{ padding: '12px 20px' }} onClick={handleClick}>
-          <ListItemIcon sx={{ width: 25 }}>{iconEl}</ListItemIcon>
+        <ListItemButton sx={{ padding: '12px 20px', gap: '1rem' }} onClick={handleClick}>
+          <ListItemIcon sx={{ minWidth: 20 }}>{iconEl}</ListItemIcon>
           <ListItemText primary={title} />
           <span>{quantity}</span>
         </ListItemButton>

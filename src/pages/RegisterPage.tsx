@@ -2,6 +2,8 @@ import { Box, Button, TextField } from '@mui/material';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postRegisterUser } from '../user/services/api';
+import GoogleIcon from '@mui/icons-material/Google';
+
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -85,6 +87,17 @@ function RegisterPage() {
           <span>Do you already have an account?</span>
           <button onClick={goToLoginPage}>login</button>
         </div>
+        <div className="DividerContainer">
+          <hr />
+        </div>
+        <span>Or</span>
+        <a
+          href={`${import.meta.env.VITE_REACT_APP_API_URL}/auth/google/login`}
+          className="GoogleAuth"
+        >
+          <GoogleIcon sx={{ fontSize: '35px' }} />
+          <span>Sign in with Google</span>
+        </a>
       </div>
     </Box>
   );

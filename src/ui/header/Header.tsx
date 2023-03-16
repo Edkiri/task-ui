@@ -8,9 +8,11 @@ import MenuList from './components/MenuList';
 
 import './Header.css';
 import UserProfile from './components/UserProfile';
+import { useAuth } from '../../user/useAuth';
 
 function Header() {
   const { isOpen, toggleMenu } = useContext(MenuContext);
+  const { user } = useAuth();
 
   const path = window.location.pathname;
   const displayMenu = path !== '/signup' && path !== '/login';
@@ -27,19 +29,21 @@ function Header() {
         }}
       >
         <Toolbar sx={{ padding: 0, gap: '0.5rem' }}>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{
-              zIndex: 3,
-              display: `${displayMenu ? 'block' : 'none'}`,
-            }}
-            onClick={toggleMenu}
-          >
-            <MenuIcon />
-          </IconButton>
+          {user && (
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{
+                zIndex: 3,
+                display: `${displayMenu ? 'block' : 'none'}`,
+              }}
+              onClick={toggleMenu}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Goals
           </Typography>

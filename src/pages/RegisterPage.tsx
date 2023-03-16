@@ -1,13 +1,15 @@
 import { Box, Button, TextField } from '@mui/material';
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postRegisterUser } from '../user/services/api';
 
 function RegisterPage() {
   const navigate = useNavigate();
+  const [error, setError] = useState<string>();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setError('');
     const formData = new FormData(event.currentTarget);
     try {
       const email = formData.get('email') as string;
@@ -18,10 +20,18 @@ function RegisterPage() {
         password: password,
         displayName: displayName,
       });
-      navigate('/login');
-    } catch (err) {
-      console.log(err);
+      navigate('/account-created');
+    } catch (err: any) {
+      if (Array.isArray(err.response?.data?.message)) {
+        setError(err.response?.data?.message[0]);
+        return;
+      }
+      setError(err.response?.data?.message);
     }
+  };
+
+  const goToLoginPage = () => {
+    navigate('/login');
   };
 
   return (
@@ -61,6 +71,7 @@ function RegisterPage() {
             name="displayName"
             id="displayName"
           />
+          {error && <span className="errorMsg">{error}</span>}
           <Button
             sx={{ marginTop: '0.5rem' }}
             type="submit"
@@ -70,6 +81,10 @@ function RegisterPage() {
             Register
           </Button>
         </form>
+        <div className="goToLoginContainer">
+          <span>Do you already have an account?</span>
+          <button onClick={goToLoginPage}>login</button>
+        </div>
       </div>
     </Box>
   );

@@ -1,28 +1,33 @@
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, TextField } from '@mui/material';
-import GoogleIcon from '@mui/icons-material/Google';
 import { postLoginUser } from '../user/services/api';
 
 function LoginPage() {
   const navigate = useNavigate();
+  const [error, setError] = useState<string>();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    console.log(formData);
+    setError('');
     try {
       const email = formData.get('email') as string;
       const password = formData.get('password') as string;
-      const displayName = formData.get('displayName') as string;
-      const user = await postLoginUser({
+      await postLoginUser({
         email: email,
         password: password,
       });
       navigate('/');
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      if (err.response?.data?.statusCode === 401) {
+        setError('Email or password incorrect');
+      }
     }
+  };
+
+  const goToRegisterPage = () => {
+    navigate('/signup');
   };
 
   return (
@@ -44,6 +49,7 @@ function LoginPage() {
             size="small"
             name="email"
           />
+
           <TextField
             fullWidth
             label="Password"
@@ -52,6 +58,7 @@ function LoginPage() {
             size="small"
             name="password"
           />
+          {error && <span className="errorMsg">{error}</span>}
           <Button
             sx={{ marginTop: '0.5rem' }}
             type="submit"
@@ -61,17 +68,20 @@ function LoginPage() {
             Login
           </Button>
         </form>
-        <div className="DividerContainer">
+        <button className="goToRegisterBtn" onClick={goToRegisterPage}>
+          Create an account
+        </button>
+        {/* <div className="DividerContainer">
           <hr />
-        </div>
-        <span>Or</span>
+        </div> */}
+        {/* <span>Or</span>
         <a
-          href="http://localhost:3000/api/auth/google/login"
+          href={`${import.meta.env.VITE_REACT_APP_API_URL}/auth/google/login`}
           className="GoogleAuth"
         >
           <GoogleIcon sx={{ fontSize: '35px' }} />
           <span>Sign in with Google</span>
-        </a>
+        </a> */}
       </div>
     </Box>
   );

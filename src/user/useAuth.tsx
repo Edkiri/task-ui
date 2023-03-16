@@ -13,8 +13,8 @@ export function useAuth() {
         setTimeout(() => setLoading(false), 1000);
       })
       .catch((err) => {
-        console.log(err);
         setTimeout(() => setLoading(false), 1000);
+        console.log('error geeting user profile');
       });
   }, []);
 

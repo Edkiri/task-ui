@@ -41,3 +41,60 @@ a {
 .GoogleAuthGoogleAuth > span {
     font-size: 1rem;
 }
+.goToRegisterBtn {
+    border: none;
+    background-color: transparent;
+    color: #0000FF;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+}
+.goToRegisterBtn:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+.goToLoginContainer {
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    color: white;
+    margin-top: 1.5rem;
+}
+.goToLoginContainer button {
+    border: none;
+    background-color: transparent;
+    color: #0000FF;
+    font-size: 1rem;
+}
+.goToLoginContainer button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+.errorMsg {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    color: #f1707b;
+    font-size: 1rem;
+}
+
+.AccountCreatedPageContainer {
+    display: flex;
+    flex-direction: column;
+}
+.AccountCreatedPageContainer h2 {
+    color: white;
+    width: 100%;
+    margin-top: 1.5rem;
+    text-align: center;
+}
+.AccountCreatedPageContainer button {
+    border: none;
+    background-color: transparent;
+    color: #0000FF;
+    font-size: 1rem;
+}
+.AccountCreatedPageContainer button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

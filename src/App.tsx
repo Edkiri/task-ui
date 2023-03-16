@@ -23,6 +23,7 @@ import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import { AuthenticatedRoute } from './user/AuthenticatedRoute';
 import { User } from './user/types';
+import AccountCreatedPage from './pages/AccountCreated';
 
 const darkTheme = createTheme({
   palette: {
@@ -31,8 +32,8 @@ const darkTheme = createTheme({
 });
 
 type Props = {
-  user?: User;
-  setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+  user?: User | null | undefined;
+  setUser: React.Dispatch<React.SetStateAction<User | null | undefined>>;
 };
 
 function AppWithProviders({
@@ -50,7 +51,7 @@ function AppWithProviders({
 }
 
 export function App() {
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<User | null | undefined>();
   return (
     <AppWithProviders user={user} setUser={setUser}>
       <>
@@ -58,6 +59,7 @@ export function App() {
         <Container maxWidth="md">
           <Routes>
             <Route path="/signup" element={<RegisterPage />} />
+            <Route path="/account-created" element={<AccountCreatedPage />} />
             <Route path="/login" element={<LoginPage />} />
 
             <Route

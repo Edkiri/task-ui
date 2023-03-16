@@ -2,8 +2,8 @@ import { createContext } from 'react';
 import { User } from './types';
 
 type AuthContextType = {
-  user?: User;
-  updateAuthUser: (data: User) => void;
+  user?: User | null | undefined;
+  updateAuthUser: (data: User | null) => void;
 };
 
 export const AuthContext = createContext<AuthContextType>({

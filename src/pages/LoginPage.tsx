@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, TextField } from '@mui/material';
+import GoogleIcon from '@mui/icons-material/Google';
 import { postLoginUser } from '../user/services/api';
 
 function LoginPage() {
@@ -71,17 +72,17 @@ function LoginPage() {
         <button className="goToRegisterBtn" onClick={goToRegisterPage}>
           Create an account
         </button>
-        {/* <div className="DividerContainer">
+        <div className="DividerContainer">
           <hr />
-        </div> */}
-        {/* <span>Or</span>
+        </div>
+        <span>Or</span>
         <a
           href={`${import.meta.env.VITE_REACT_APP_API_URL}/auth/google/login`}
           className="GoogleAuth"
         >
           <GoogleIcon sx={{ fontSize: '35px' }} />
           <span>Sign in with Google</span>
-        </a> */}
+        </a>
       </div>
     </Box>
   );
